@@ -1,0 +1,107 @@
+{
+  "info": {
+    "name": "User Management API",
+    "description": "API for managing users with CRUD operations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"johndoe@example.com\",\n    \"password\": \"securepassword\",\n    \"roleId\": \"123e4567-e89b-12d3-a456-426614174000\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/users",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["users"]
+        }
+      }
+    },
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/users",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["users"]
+        }
+      }
+    },
+    {
+      "name": "Get User by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/users/:id",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["users", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "123e4567-e89b-12d3-a456-426614174000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update User",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"janedoe@example.com\",\n    \"password\": \"newsecurepassword\",\n    \"roleId\": \"123e4567-e89b-12d3-a456-426614174000\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:id",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["users", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "123e4567-e89b-12d3-a456-426614174000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete User",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8080/users/:id",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["users", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "123e4567-e89b-12d3-a456-426614174000"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

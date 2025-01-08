@@ -1,0 +1,208 @@
+{
+  "info": {
+    "name": "User and Role API Collection",
+    "description": "Postman collection for User and Role APIs including valid and invalid cases to test global exception handling.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "Create Role - Valid",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin\",\n  \"description\": \"Administrator role\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/roles",
+              "host": ["http://localhost:8080"],
+              "path": ["roles"]
+            }
+          }
+        },
+        {
+          "name": "Create Role - Duplicate Name",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin\",\n  \"description\": \"Duplicate role\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/roles",
+              "host": ["http://localhost:8080"],
+              "path": ["roles"]
+            }
+          }
+        },
+        {
+          "name": "Get All Roles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/roles",
+              "host": ["http://localhost:8080"],
+              "path": ["roles"]
+            }
+          }
+        },
+        {
+          "name": "Get Role by ID - Valid",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/roles/{{roleId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["roles", "{{roleId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Role by ID - Invalid UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/roles/invalid-uuid",
+              "host": ["http://localhost:8080"],
+              "path": ["roles", "invalid-uuid"]
+            }
+          }
+        },
+        {
+          "name": "Delete Role - Valid",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/roles/{{roleId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["roles", "{{roleId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Role - Nonexistent",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/roles/nonexistent-role-id",
+              "host": ["http://localhost:8080"],
+              "path": ["roles", "nonexistent-role-id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User - Valid",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"securepassword\",\n  \"roleIds\": [\"{{roleId1}}\", \"{{roleId2}}\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/users",
+              "host": ["http://localhost:8080"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Create User - Invalid Role IDs",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"password\": \"securepassword\",\n  \"roleIds\": [\"invalid-role-id\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/users",
+              "host": ["http://localhost:8080"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/users",
+              "host": ["http://localhost:8080"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID - Valid",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/users/{{userId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID - Nonexistent",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/users/nonexistent-user-id",
+              "host": ["http://localhost:8080"],
+              "path": ["users", "nonexistent-user-id"]
+            }
+          }
+        },
+        {
+          "name": "Update User - Valid",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"email\": \"john.smith@example.com\",\n  \"password\": \"newpassword\",\n  \"roleIds\": [\"{{roleId1}}\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/{{userId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete User - Valid",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/users/{{userId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["users", "{{userId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
